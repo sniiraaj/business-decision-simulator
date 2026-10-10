@@ -20,83 +20,111 @@ def go_to(page_name):
 
 
 # ==========================================
-# HIGH-CONTRAST GLASSMORPHIC CSS
+# EXACT DESIGN 4 GLASSMORPHIC CSS INJECTION
 # ==========================================
 glassmorphism_css = """
 <style>
-/* Gradient background */
+/* 1. Gradient Ambient Background */
 .stApp {
-    background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 50%, #fce7f3 100%) !important;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 45%, #fce7f3 100%) !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
-/* Force high-contrast dark slate text across all Streamlit elements */
-.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6, 
-.stApp p, .stApp span, .stApp label, .stApp div, .stApp .stMarkdown {
-    color: #0f172a !important;
+header[data-testid="stHeader"] {
+    background: transparent !important;
 }
 
-/* Secondary caption text */
-.stApp [data-testid="stCaptionContainer"] *, .stApp small {
-    color: #475569 !important;
-}
-
-/* Glassmorphic frosted cards with solid borders */
-[data-testid="stVerticalBlockBorderWrapper"] {
+/* 2. Frosted Glass Cards (Design 4 White Container Cards) */
+div[data-testid="stVerticalBlockBorderWrapper"] {
     background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-radius: 20px !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
     border: 1px solid rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
-    padding: 1.25rem !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 30px rgba(31, 38, 135, 0.08), inset 0 0 15px rgba(255, 255, 255, 0.6) !important;
+    padding: 1.5rem !important;
+    transition: all 0.25s ease-in-out !important;
 }
 
-[data-testid="stVerticalBlockBorderWrapper"]:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* Glassmorphic metric blocks */
-[data-testid="stMetric"] {
+div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 16px 40px rgba(31, 38, 135, 0.14), inset 0 0 20px rgba(255, 255, 255, 0.8) !important;
     background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 14px !important;
-    padding: 14px 18px !important;
-    border: 1px solid rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Standard Buttons */
-.stButton > button {
-    border-radius: 12px !important;
-    border: 1px solid #cbd5e1 !important;
-    background-color: #ffffff !important;
+/* 3. High-Contrast Typography */
+.stApp h1, .stApp h2, .stApp h3, .stApp h4 {
     color: #0f172a !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+}
+
+.stApp p, .stApp span, .stApp div, .stMarkdown {
+    color: #334155 !important;
+}
+
+div[data-testid="stCaptionContainer"] p, div[data-testid="stCaptionContainer"] span, .stApp small {
+    color: #475569 !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+}
+
+/* 4. Gradient Pill Buttons (Design 4 Style) */
+.stButton > button {
+    border-radius: 30px !important;
+    border: none !important;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: #ffffff !important;
     font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    padding: 0.55rem 1.4rem !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3) !important;
     transition: all 0.2s ease !important;
+}
+
+.stButton > button p, .stButton > button span {
+    color: #ffffff !important;
 }
 
 .stButton > button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2) !important;
-    background-color: #f8fafc !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
 }
 
-/* Primary Hero Button */
+/* Secondary / Back Buttons */
+.stButton > button[kind="secondary"] {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #0f172a !important;
+    border: 1px solid rgba(203, 213, 225, 0.9) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.stButton > button[kind="secondary"] p, .stButton > button[kind="secondary"] span {
+    color: #0f172a !important;
+}
+
+/* Hero Button for ML Simulator */
 .stButton > button[kind="primary"] {
-    background-color: #6366f1 !important;
-    color: #ffffff !important;
-    border: none !important;
-}
-
-.stButton > button[kind="primary"] * {
-    color: #ffffff !important;
+    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%) !important;
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.35) !important;
+    font-size: 1.05rem !important;
+    padding: 0.7rem 1.8rem !important;
 }
 
 .stButton > button[kind="primary"]:hover {
-    background-color: #4f46e5 !important;
+    background: linear-gradient(135deg, #db2777 0%, #7c3aed 100%) !important;
+    box-shadow: 0 8px 25px rgba(236, 72, 153, 0.5) !important;
+}
+
+/* Metric Blocks on Inner Pages */
+[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 </style>
 """
@@ -106,21 +134,21 @@ st.markdown(glassmorphism_css, unsafe_allow_html=True)
 # ==========================================
 # SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("💼 Navigation Hub")
+st.sidebar.title("💼 Executive Hub")
 if st.sidebar.button("🏠 Home Dashboard", use_container_width=True):
     go_to("Home")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Quick Jump:")
+st.sidebar.caption("Quick Select:")
 if st.sidebar.button("📊 ML Demand Simulator", use_container_width=True):
     go_to("Module 1")
 if st.sidebar.button("⚖️ Break-Even Calculator", use_container_width=True):
     go_to("Module 2")
 if st.sidebar.button("🏦 Loan Calculator", use_container_width=True):
     go_to("Module 3")
-if st.sidebar.button("🏷️ Product Pricing Planner", use_container_width=True):
+if st.sidebar.button("🏷️ Pricing Planner", use_container_width=True):
     go_to("Module 4")
-if st.sidebar.button("📑 Simple P&L Modeler", use_container_width=True):
+if st.sidebar.button("📑 P&L Modeler", use_container_width=True):
     go_to("Module 5")
 
 
@@ -129,39 +157,37 @@ if st.sidebar.button("📑 Simple P&L Modeler", use_container_width=True):
 # ==========================================
 if st.session_state.page == "Home":
     st.title("Executive Business & Financial Suite")
-    st.markdown("Select a workbench to explore predictive and financial models:")
-    st.markdown("---")
+    st.caption("Select a workbench to explore predictive and financial models:")
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col_left, col_mid, col_right = st.columns([1, 1.25, 1], gap="large")
 
     # --------------------------------------
-    # LEFT COLUMN (TOP & BOTTOM)
+    # LEFT COLUMN
     # --------------------------------------
     with col_left:
-        # Top-Left
         with st.container(border=True):
             st.markdown("### ⚖️ Break-Even Units")
             st.caption(
                 "Find the minimum unit sales volume required to cover fixed overhead expenses."
             )
             st.markdown("<br>", unsafe_allow_html=True)
-            if st.button("Launch Calculator ⚖️", key="btn2", use_container_width=True):
+            if st.button("Calculate ⚖️", key="btn2", use_container_width=True):
                 go_to("Module 2")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Bottom-Left
         with st.container(border=True):
             st.markdown("### 🏦 Loan & Interest")
             st.caption(
                 "Calculate monthly debt service payments and visualize amortization curves."
             )
             st.markdown("<br>", unsafe_allow_html=True)
-            if st.button("Launch Calculator 🏦", key="btn3", use_container_width=True):
+            if st.button("Calculate 🏦", key="btn3", use_container_width=True):
                 go_to("Module 3")
 
     # --------------------------------------
-    # DEAD MIDDLE COLUMN (FLAGSHIP SIMULATOR HERO)
+    # DEAD MIDDLE COLUMN (FLAGSHIP SIMULATOR)
     # --------------------------------------
     with col_mid:
         with st.container(border=True):
@@ -180,29 +206,27 @@ if st.session_state.page == "Home":
                 go_to("Module 1")
 
     # --------------------------------------
-    # RIGHT COLUMN (TOP & BOTTOM)
+    # RIGHT COLUMN
     # --------------------------------------
     with col_right:
-        # Top-Right
         with st.container(border=True):
             st.markdown("### 🏷️ Product Pricing")
             st.caption(
                 "Convert target profit margin goals into recommended retail pricing and markups."
             )
             st.markdown("<br>", unsafe_allow_html=True)
-            if st.button("Launch Planner 🏷️", key="btn4", use_container_width=True):
+            if st.button("Calculate 🏷️", key="btn4", use_container_width=True):
                 go_to("Module 4")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Bottom-Right
         with st.container(border=True):
             st.markdown("### 📑 Simple P&L")
             st.caption(
                 "Model sequential income statement math from gross revenue down to net profit."
             )
             st.markdown("<br>", unsafe_allow_html=True)
-            if st.button("Launch Modeler 📑", key="btn5", use_container_width=True):
+            if st.button("Calculate 📑", key="btn5", use_container_width=True):
                 go_to("Module 5")
 
 
