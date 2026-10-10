@@ -20,35 +20,95 @@ def go_to(page_name):
 
 
 # ==========================================
-# SIDEBAR QUICK NAVIGATION
+# GLASSMORPHIC CUSTOM CSS INJECTION
+# ==========================================
+glassmorphism_css = """
+<style>
+/* Gradient ambient background */
+.stApp {
+    background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 50%, #fce7f3 100%) !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Glassmorphic frosted cards */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+    padding: 1.25rem !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12) !important;
+}
+
+/* Glassmorphic metric blocks */
+[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.65) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Custom rounded buttons */
+.stButton > button {
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Matplotlib figure background transparency */
+div.stPlotlyChart, div.stPyplot {
+    background: transparent !important;
+}
+</style>
+"""
+st.markdown(glassmorphism_css, unsafe_allow_html=True)
+
+
+# ==========================================
+# SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("💼 Navigation Hub")
 if st.sidebar.button("🏠 Home Dashboard", use_container_width=True):
     go_to("Home")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Quick Select:")
-if st.sidebar.button("📊 1. ML Demand Simulator", use_container_width=True):
+st.sidebar.caption("Quick Jump:")
+if st.sidebar.button("📊 ML Demand Simulator", use_container_width=True):
     go_to("Module 1")
-if st.sidebar.button("⚖️ 2. Break-Even Calculator", use_container_width=True):
+if st.sidebar.button("⚖️ Break-Even Calculator", use_container_width=True):
     go_to("Module 2")
-if st.sidebar.button("🏦 3. Loan Calculator", use_container_width=True):
+if st.sidebar.button("🏦 Loan Calculator", use_container_width=True):
     go_to("Module 3")
-if st.sidebar.button("🏷️ 4. Pricing Planner", use_container_width=True):
+if st.sidebar.button("🏷️ Product Pricing Planner", use_container_width=True):
     go_to("Module 4")
-if st.sidebar.button("📑 5. P&L Modeler", use_container_width=True):
+if st.sidebar.button("📑 Simple P&L Modeler", use_container_width=True):
     go_to("Module 5")
 
 
 # ==========================================
-# PAGE 0: FIXED HOME DASHBOARD (2 - 1 - 2 LAYOUT)
+# HOME DASHBOARD (2 - 1 - 2 GLASSMORPHIC HUB)
 # ==========================================
 if st.session_state.page == "Home":
-    st.title("💼 Executive Business & Financial Suite")
-    st.markdown("Select a module below to launch its dedicated workbench:")
+    st.title("Executive Business & Financial Suite")
+    st.markdown("Select a workbench to explore predictive and financial models:")
     st.markdown("---")
 
-    col_left, col_mid, col_right = st.columns([1, 1.2, 1], gap="medium")
+    col_left, col_mid, col_right = st.columns([1, 1.25, 1], gap="large")
 
     # --------------------------------------
     # LEFT COLUMN (TOP & BOTTOM)
@@ -56,37 +116,35 @@ if st.session_state.page == "Home":
     with col_left:
         # Top-Left
         with st.container(border=True):
-            st.subheader("⚖️ Module 2")
-            st.markdown("**Break-Even Units Calculator**")
+            st.markdown("### ⚖️ Break-Even Units")
             st.caption(
-                "Find the minimum unit volume needed to cover fixed overhead costs."
+                "Find the minimum unit sales volume required to cover fixed overhead expenses."
             )
-            if st.button("Launch Break-Even ⚖️", key="btn2", use_container_width=True):
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button("Launch Calculator ⚖️", key="btn2", use_container_width=True):
                 go_to("Module 2")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
         # Bottom-Left
         with st.container(border=True):
-            st.subheader("🏦 Module 3")
-            st.markdown("**Loan & Compound Interest**")
+            st.markdown("### 🏦 Loan & Interest")
             st.caption(
-                "Calculate debt servicing payments and principal payoff curves."
+                "Calculate monthly debt service payments and visualize amortization curves."
             )
-            if st.button("Launch Loan Calc 🏦", key="btn3", use_container_width=True):
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button("Launch Calculator 🏦", key="btn3", use_container_width=True):
                 go_to("Module 3")
 
     # --------------------------------------
-    # DEAD MIDDLE COLUMN (FLAGSHIP SIMULATOR)
+    # DEAD MIDDLE COLUMN (FLAGSHIP SIMULATOR HERO)
     # --------------------------------------
     with col_mid:
-        st.markdown("<br>", unsafe_allow_html=True)
         with st.container(border=True):
-            st.subheader("⭐ FLAGSHIP ENGINE ⭐")
-            st.header("📊 Module 1")
-            st.markdown("### Demand & Decision Simulator (ML)")
+            st.caption("⭐ FLAGSHIP ENGINE ⭐")
+            st.markdown("## 📊 ML Demand Simulator")
             st.write(
-                "Predict unit demand using an OLS regression matrix model and simulate financial P&L outcomes."
+                "Forecast demand with an OLS matrix model, optimize pricing, and model real-time business P&L outcomes."
             )
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button(
@@ -103,29 +161,29 @@ if st.session_state.page == "Home":
     with col_right:
         # Top-Right
         with st.container(border=True):
-            st.subheader("🏷️ Module 4")
-            st.markdown("**Pricing & Margin Planner**")
+            st.markdown("### 🏷️ Product Pricing")
             st.caption(
-                "Convert target profit margins into optimal retail pricing & markup."
+                "Convert target profit margin goals into recommended retail pricing and markups."
             )
-            if st.button("Launch Pricing 🏷️", key="btn4", use_container_width=True):
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button("Launch Planner 🏷️", key="btn4", use_container_width=True):
                 go_to("Module 4")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
         # Bottom-Right
         with st.container(border=True):
-            st.subheader("📑 Module 5")
-            st.markdown("**Simple Business P&L Modeler**")
+            st.markdown("### 📑 Simple P&L")
             st.caption(
-                "Model top-to-bottom income statement math from sales down to net profit."
+                "Model sequential income statement math from gross revenue down to net profit."
             )
-            if st.button("Launch P&L Modeler 📑", key="btn5", use_container_width=True):
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button("Launch Modeler 📑", key="btn5", use_container_width=True):
                 go_to("Module 5")
 
 
 # ==========================================
-# SUB-MODULE PAGES (WITH TOP BACK BUTTON)
+# SUB-PAGES (WITH TOP BACK BUTTON)
 # ==========================================
 else:
     top_col, _ = st.columns([2, 8])
@@ -136,12 +194,12 @@ else:
     st.markdown("---")
 
     # --------------------------------------
-    # MODULE 1: ML DEMAND SIMULATOR
+    # ML DEMAND SIMULATOR
     # --------------------------------------
     if st.session_state.page == "Module 1":
-        st.title("📊 Demand & Business Decision Simulator (ML)")
+        st.title("📊 Demand & Business Decision Simulator (ML Engine)")
         st.markdown(
-            "Forecast unit demand using an OLS matrix engine and model real-time ROI scenarios."
+            "Forecast unit demand using an OLS matrix model and run live P&L scenario analyses."
         )
 
         np.random.seed(42)
@@ -212,23 +270,24 @@ else:
         c4.metric("Net Profit", f"${net_profit:,.2f}")
         c5.metric("ROI", f"{roi:.1f}%")
 
-        fig, ax = plt.subplots(figsize=(7, 3))
+        fig, ax = plt.subplots(figsize=(7, 3), facecolor="none")
+        ax.set_facecolor("none")
         ax.bar(
             ["Revenue", "Production Cost", "Ad Spend", "Net Profit"],
             [total_revenue, production_cost, ad_spend, net_profit],
             color=[
-                "#1f77b4",
-                "#ff7f0e",
-                "#d62728",
-                "#2ca02c" if net_profit >= 0 else "#d62728",
+                "#6366f1",
+                "#f59e0b",
+                "#ef4444",
+                "#10b981" if net_profit >= 0 else "#ef4444",
             ],
         )
         ax.set_ylabel("USD ($)")
-        ax.grid(axis="y", linestyle="--", alpha=0.5)
+        ax.grid(axis="y", linestyle="--", alpha=0.3)
         st.pyplot(fig)
 
     # --------------------------------------
-    # MODULE 2: BREAK-EVEN CALCULATOR
+    # BREAK-EVEN CALCULATOR
     # --------------------------------------
     elif st.session_state.page == "Module 2":
         st.title("⚖️ Break-Even Units Calculator")
@@ -266,12 +325,13 @@ else:
             rev = units * unit_price
             costs = fixed_costs + (units * variable_cost)
 
-            fig, ax = plt.subplots(figsize=(7, 3))
-            ax.plot(units, rev, label="Total Revenue", color="green", linewidth=2)
-            ax.plot(units, costs, label="Total Cost", color="red", linewidth=2)
+            fig, ax = plt.subplots(figsize=(7, 3), facecolor="none")
+            ax.set_facecolor("none")
+            ax.plot(units, rev, label="Total Revenue", color="#10b981", linewidth=2.5)
+            ax.plot(units, costs, label="Total Cost", color="#ef4444", linewidth=2.5)
             ax.axvline(
                 be_units,
-                color="gray",
+                color="#6b7280",
                 linestyle="--",
                 label=f"Break-Even ({be_units} units)",
             )
@@ -282,7 +342,7 @@ else:
             st.pyplot(fig)
 
     # --------------------------------------
-    # MODULE 3: LOAN CALCULATOR
+    # LOAN CALCULATOR
     # --------------------------------------
     elif st.session_state.page == "Module 3":
         st.title("🏦 Loan & Compound Interest Calculator")
@@ -332,8 +392,9 @@ else:
         else:
             balance = [principal - (monthly_pmt * m) for m in months]
 
-        fig, ax = plt.subplots(figsize=(7, 3))
-        ax.plot(months, balance, color="purple", linewidth=2)
+        fig, ax = plt.subplots(figsize=(7, 3), facecolor="none")
+        ax.set_facecolor("none")
+        ax.plot(months, balance, color="#8b5cf6", linewidth=2.5)
         ax.set_title("Remaining Principal Payoff Schedule")
         ax.set_xlabel("Months")
         ax.set_ylabel("Remaining Balance ($)")
@@ -341,7 +402,7 @@ else:
         st.pyplot(fig)
 
     # --------------------------------------
-    # MODULE 4: PRICING PLANNER
+    # PRICING PLANNER
     # --------------------------------------
     elif st.session_state.page == "Module 4":
         st.title("🏷️ Product Pricing, Markup & Margin Planner")
@@ -364,22 +425,23 @@ else:
         m2.metric("Gross Profit per Unit", f"${gross_profit:,.2f}")
         m3.metric("Markup Percentage", f"{markup_pct:.1f}%")
 
-        fig, ax = plt.subplots(figsize=(6, 2.5))
-        ax.barh(["Selling Price"], [cost_price], label="Cost Price", color="#ff7f0e")
+        fig, ax = plt.subplots(figsize=(6, 2.5), facecolor="none")
+        ax.set_facecolor("none")
+        ax.barh(["Selling Price"], [cost_price], label="Cost Price", color="#f59e0b")
         ax.barh(
             ["Selling Price"],
             [gross_profit],
             left=[cost_price],
             label="Gross Profit",
-            color="#2ca02c",
+            color="#10b981",
         )
         ax.set_xlabel("USD ($)")
         ax.legend()
-        ax.grid(axis="x", linestyle="--", alpha=0.5)
+        ax.grid(axis="x", linestyle="--", alpha=0.3)
         st.pyplot(fig)
 
     # --------------------------------------
-    # MODULE 5: P&L MODELER
+    # P&L MODELER
     # --------------------------------------
     elif st.session_state.page == "Module 5":
         st.title("📑 Simple Business P&L Modeler")
@@ -418,18 +480,19 @@ else:
             "Net Income", f"${net_income:,.2f}", f"{net_margin:.1f}% Net Margin"
         )
 
-        fig, ax = plt.subplots(figsize=(7, 3))
+        fig, ax = plt.subplots(figsize=(7, 3), facecolor="none")
+        ax.set_facecolor("none")
         ax.bar(
             ["Revenue", "COGS", "OpEx", "Taxes", "Net Income"],
             [revenue, cogs, opex, taxes, net_income],
             color=[
-                "#1f77b4",
-                "#ff7f0e",
-                "#d62728",
-                "#9467bd",
-                "#2ca02c" if net_income >= 0 else "#d62728",
+                "#6366f1",
+                "#f59e0b",
+                "#ef4444",
+                "#8b5cf6",
+                "#10b981" if net_income >= 0 else "#ef4444",
             ],
         )
         ax.set_ylabel("USD ($)")
-        ax.grid(axis="y", linestyle="--", alpha=0.5)
+        ax.grid(axis="y", linestyle="--", alpha=0.3)
         st.pyplot(fig)
