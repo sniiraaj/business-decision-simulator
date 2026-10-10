@@ -20,47 +20,60 @@ def go_to(page_name):
 
 
 # ==========================================
-# GLASSMORPHIC CUSTOM CSS INJECTION
+# HIGH-CONTRAST GLASSMORPHIC CSS
 # ==========================================
 glassmorphism_css = """
 <style>
-/* Gradient ambient background */
+/* Gradient background */
 .stApp {
     background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 50%, #fce7f3 100%) !important;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Glassmorphic frosted cards */
+/* Force high-contrast dark slate text across all Streamlit elements */
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6, 
+.stApp p, .stApp span, .stApp label, .stApp div, .stApp .stMarkdown {
+    color: #0f172a !important;
+}
+
+/* Secondary caption text */
+.stApp [data-testid="stCaptionContainer"] *, .stApp small {
+    color: #475569 !important;
+}
+
+/* Glassmorphic frosted cards with solid borders */
 [data-testid="stVerticalBlockBorderWrapper"] {
-    background: rgba(255, 255, 255, 0.55) !important;
+    background: rgba(255, 255, 255, 0.75) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
     padding: 1.25rem !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 [data-testid="stVerticalBlockBorderWrapper"]:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12) !important;
 }
 
 /* Glassmorphic metric blocks */
 [data-testid="stMetric"] {
-    background: rgba(255, 255, 255, 0.65) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(10px) !important;
     border-radius: 14px !important;
     padding: 14px 18px !important;
     border: 1px solid rgba(255, 255, 255, 0.9) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Custom rounded buttons */
+/* Standard Buttons */
 .stButton > button {
     border-radius: 12px !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid #cbd5e1 !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
     font-weight: 600 !important;
     transition: all 0.2s ease !important;
 }
@@ -68,11 +81,22 @@ glassmorphism_css = """
 .stButton > button:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2) !important;
+    background-color: #f8fafc !important;
 }
 
-/* Matplotlib figure background transparency */
-div.stPlotlyChart, div.stPyplot {
-    background: transparent !important;
+/* Primary Hero Button */
+.stButton > button[kind="primary"] {
+    background-color: #6366f1 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+.stButton > button[kind="primary"] * {
+    color: #ffffff !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background-color: #4f46e5 !important;
 }
 </style>
 """
