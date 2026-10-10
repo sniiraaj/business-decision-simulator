@@ -10,7 +10,6 @@ st.set_page_config(
     page_title="Executive Business Suite", layout="wide", page_icon="💼"
 )
 
-# Initialize navigation page state
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
@@ -28,79 +27,109 @@ if st.sidebar.button("🏠 Home Dashboard", use_container_width=True):
     go_to("Home")
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Quick Jump To:")
-if st.sidebar.button("📊 1. Demand & Decision Simulator (ML)", use_container_width=True):
+st.sidebar.caption("Quick Select:")
+if st.sidebar.button("📊 1. ML Demand Simulator", use_container_width=True):
     go_to("Module 1")
-if st.sidebar.button("⚖️ 2. Break-Even Units Calculator", use_container_width=True):
+if st.sidebar.button("⚖️ 2. Break-Even Calculator", use_container_width=True):
     go_to("Module 2")
-if st.sidebar.button("🏦 3. Loan & Interest Calculator", use_container_width=True):
+if st.sidebar.button("🏦 3. Loan Calculator", use_container_width=True):
     go_to("Module 3")
-if st.sidebar.button("🏷️ 4. Product Pricing Planner", use_container_width=True):
+if st.sidebar.button("🏷️ 4. Pricing Planner", use_container_width=True):
     go_to("Module 4")
-if st.sidebar.button("📑 5. Simple Business P&L Modeler", use_container_width=True):
+if st.sidebar.button("📑 5. P&L Modeler", use_container_width=True):
     go_to("Module 5")
 
 
 # ==========================================
-# PAGE 0: HOME DASHBOARD (5-BUTTON HUB)
+# PAGE 0: FIXED HOME DASHBOARD (2 - 1 - 2 LAYOUT)
 # ==========================================
 if st.session_state.page == "Home":
     st.title("💼 Executive Business & Financial Suite")
-    st.markdown("Select a business module to open its dedicated workbench:")
+    st.markdown("Select a module below to launch its dedicated workbench:")
     st.markdown("---")
 
-    col1, col2 = st.columns(2)
+    col_left, col_mid, col_right = st.columns([1, 1.2, 1], gap="medium")
 
-    with col1:
+    # --------------------------------------
+    # LEFT COLUMN (TOP & BOTTOM)
+    # --------------------------------------
+    with col_left:
+        # Top-Left
         with st.container(border=True):
-            st.subheader("📊 Module 1: Demand & Decision Simulator (ML)")
-            st.write(
-                "Predict unit demand using a regression matrix engine and run live P&L scenarios."
+            st.subheader("⚖️ Module 2")
+            st.markdown("**Break-Even Units Calculator**")
+            st.caption(
+                "Find the minimum unit volume needed to cover fixed overhead costs."
             )
-            if st.button("Launch ML Simulator 🚀", key="btn1", use_container_width=True, type="primary"):
-                go_to("Module 1")
+            if st.button("Launch Break-Even ⚖️", key="btn2", use_container_width=True):
+                go_to("Module 2")
 
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Bottom-Left
         with st.container(border=True):
-            st.subheader("🏦 Module 3: Loan & Compound Interest Calculator")
-            st.write(
-                "Calculate monthly debt service payments and visualize loan payoff schedules."
+            st.subheader("🏦 Module 3")
+            st.markdown("**Loan & Compound Interest**")
+            st.caption(
+                "Calculate debt servicing payments and principal payoff curves."
             )
-            if st.button("Launch Loan Calculator 🏦", key="btn3", use_container_width=True):
+            if st.button("Launch Loan Calc 🏦", key="btn3", use_container_width=True):
                 go_to("Module 3")
 
+    # --------------------------------------
+    # DEAD MIDDLE COLUMN (FLAGSHIP SIMULATOR)
+    # --------------------------------------
+    with col_mid:
+        st.markdown("<br>", unsafe_allow_html=True)
         with st.container(border=True):
-            st.subheader("📑 Module 5: Simple Business P&L Modeler")
+            st.subheader("⭐ FLAGSHIP ENGINE ⭐")
+            st.header("📊 Module 1")
+            st.markdown("### Demand & Decision Simulator (ML)")
             st.write(
-                "Model sequential income statement math from gross sales down to net profit."
+                "Predict unit demand using an OLS regression matrix model and simulate financial P&L outcomes."
+            )
+            st.markdown("<br>", unsafe_allow_html=True)
+            if st.button(
+                "🚀 LAUNCH ML SIMULATOR",
+                key="btn1",
+                use_container_width=True,
+                type="primary",
+            ):
+                go_to("Module 1")
+
+    # --------------------------------------
+    # RIGHT COLUMN (TOP & BOTTOM)
+    # --------------------------------------
+    with col_right:
+        # Top-Right
+        with st.container(border=True):
+            st.subheader("🏷️ Module 4")
+            st.markdown("**Pricing & Margin Planner**")
+            st.caption(
+                "Convert target profit margins into optimal retail pricing & markup."
+            )
+            if st.button("Launch Pricing 🏷️", key="btn4", use_container_width=True):
+                go_to("Module 4")
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Bottom-Right
+        with st.container(border=True):
+            st.subheader("📑 Module 5")
+            st.markdown("**Simple Business P&L Modeler**")
+            st.caption(
+                "Model top-to-bottom income statement math from sales down to net profit."
             )
             if st.button("Launch P&L Modeler 📑", key="btn5", use_container_width=True):
                 go_to("Module 5")
-
-    with col2:
-        with st.container(border=True):
-            st.subheader("⚖️ Module 2: Break-Even Units Calculator")
-            st.write(
-                "Determine the minimum sales volume required to cover fixed overhead expenses."
-            )
-            if st.button("Launch Break-Even Calculator ⚖️", key="btn2", use_container_width=True):
-                go_to("Module 2")
-
-        with st.container(border=True):
-            st.subheader("🏷️ Module 4: Product Pricing & Margin Planner")
-            st.write(
-                "Calculate optimal selling prices and effective markups based on cost price and target margin %."
-            )
-            if st.button("Launch Pricing Planner 🏷️", key="btn4", use_container_width=True):
-                go_to("Module 4")
 
 
 # ==========================================
 # SUB-MODULE PAGES (WITH TOP BACK BUTTON)
 # ==========================================
 else:
-    # Universal Back Button Header
-    top_col1, _ = st.columns([2, 8])
-    with top_col1:
+    top_col, _ = st.columns([2, 8])
+    with top_col:
         if st.button("⬅️ Back to Main Hub", type="secondary", use_container_width=True):
             go_to("Home")
 
@@ -112,7 +141,7 @@ else:
     if st.session_state.page == "Module 1":
         st.title("📊 Demand & Business Decision Simulator (ML)")
         st.markdown(
-            "Forecast unit demand using an OLS matrix model and calculate real-time financial ROI."
+            "Forecast unit demand using an OLS matrix engine and model real-time ROI scenarios."
         )
 
         np.random.seed(42)
